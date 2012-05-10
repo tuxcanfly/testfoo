@@ -24,3 +24,11 @@ class BarTest(TestCase):
     def test_index(self):
         resp = self.client.get('/')
         self.assertEqual(200, resp.status_code)
+
+    def test_create(self):
+        post = {
+                'question'  : 'What is your name?',
+                'Submit'    : 'submit'
+        }
+        resp = self.client.post('/new/', post, follow=True)
+        self.assertEqual('What is your name?\n', resp.content)
