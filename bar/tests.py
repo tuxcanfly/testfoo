@@ -9,8 +9,10 @@ import os
 
 from django.test import TestCase
 from django.test.client import Client
-
+from django.test import LiveServerTestCase
 from django.conf import settings
+
+from selenium import webdriver
 
 from bar.models import Avatar
 
@@ -72,3 +74,25 @@ class BarTest(TestCase):
     def test_avatar_update(self):
         avatar = Avatar.objects.get(pk=1)
         self.assertRaises(NotImplementedError, avatar.update)
+
+
+class AdminLoginTest(LiveServerTestCase):
+    fixtures = ['users.json']
+
+    @classmethod
+    def setUpClass(cls):
+        cls.selenium = webdriver.Chrome()
+        super(AdminLoginTest, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(AdminLoginTest, cls).tearDownClass()
+        cls.selenium.quit()
+
+    def test_login(self):
+        self.selenium.get('%s%s' % (self.live_server_url, '/admin/'))
+        username_input = self.selenium.find_element_by_name("username")
+        username_input.send_keys('tuxcanfly')
+        password_input = self.selenium.find_element_by_name("password")
+        password_input.send_keys('welcome')
+        self.selenium.find_element_by_xpath('//input[@value="Log in"]').click()
