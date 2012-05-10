@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, CreateView
 from bar.models import Poll
 
 urlpatterns = patterns('',
@@ -11,4 +11,8 @@ urlpatterns = patterns('',
         DetailView.as_view(
             model=Poll),
         name='bar.detail'),
+    url(r'new/$',
+        CreateView.as_view(
+            model=Poll),
+        name='bar.new'),
 )
