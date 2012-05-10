@@ -5,8 +5,8 @@ ABOUT:
 
 This is a sample project to introduce testing and showcase various aspects of testing in django.
 
-Unit Test:
-----------
+Unit Test vs Integration Test:
+------------------------------
 
 A unit test is:
 
