@@ -5,8 +5,12 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
+import os
+
 from django.test import TestCase
 from django.test.client import Client
+
+from django.conf import settings
 
 
 class SimpleTest(TestCase):
@@ -37,3 +41,15 @@ class BarTest(TestCase):
         self.assertEqual('http://testserver/1/', resp.redirect_chain[0][0])
 
         self.assertEqual(('Content-Type', 'text/html; charset=utf-8'), resp._headers['content-type'])
+
+    def test_create_avatar(self):
+
+        path = os.path.join(settings.PROJECT_ROOT, 'bar/files/test.png')
+        image_file = file(path)
+
+        post = {
+                'image'     : image_file,
+                'name'      : 'test-name'
+        }
+        resp = self.client.post('/new/avatar', post, follow=True)
+        self.assertEqual(200, resp.status_code)
