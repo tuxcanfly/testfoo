@@ -5,10 +5,10 @@ from bar.models import Poll
 urlpatterns = patterns('',
     url(r'^$',
         ListView.as_view(
-            queryset=Poll.objects.all(),
-            template_name='polls/index.html')),
+            queryset=Poll.objects.all()),
+        name='bar.index'),
     url(r'^(?P<pk>\d+)/$',
         DetailView.as_view(
-            model=Poll,
-            template_name='polls/detail.html')),
+            model=Poll),
+        name='bar.detail'),
 )

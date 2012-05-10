@@ -6,6 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
+from django.test.client import Client
 
 
 class SimpleTest(TestCase):
@@ -14,3 +15,12 @@ class SimpleTest(TestCase):
         Tests that 1 + 1 always equals 2.
         """
         self.assertEqual(1 + 1, 2)
+
+class BarTest(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+
+    def test_index(self):
+        resp = self.client.get('/')
+        self.assertEqual(200, resp.status_code)
