@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, url
 from django.views.generic import DetailView, ListView, CreateView
-from django.conf import settings
 
 from bar.models import Poll, Avatar
 
@@ -30,6 +29,4 @@ urlpatterns = patterns('',
             model=Avatar,
             success_url='/'),
         name='bar.new.avatar'),
-    (r'^static/(?P<path>.*)$', 'django.views.static.serve',
-        {'document_root': settings.MEDIA_ROOT}),
 )
