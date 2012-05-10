@@ -12,4 +12,16 @@ A unit test is:
     * Consistent
     * In Memory
     * Fast
-    * Single "use case"
+    * Single concern
+    * Easy to debug
+
+In contrast, an integration test is
+
+    * Environment dependent
+    * Indeterministic
+    * External dependencies
+    * Slow
+    * Multiple concerns
+    * Hard to debug
+
+Reference: http://www.typemock.com/unit-tests-integration-tests
