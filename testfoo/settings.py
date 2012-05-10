@@ -127,7 +127,17 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+
     'bar',
+
+    'django_jenkins',
+)
+
+PROJECT_APPS = ('bar', )
+
+JENKINS_TASKS = (
+    'django_jenkins.tasks.with_coverage',
+    'django_jenkins.tasks.django_tests',
 )
 
 # A sample logging configuration. The only tangible logging
