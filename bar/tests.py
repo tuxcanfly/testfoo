@@ -12,6 +12,8 @@ from django.test.client import Client
 
 from django.conf import settings
 
+from bar.models import Avatar
+
 
 class SimpleTest(TestCase):
     def test_basic_addition(self):
@@ -62,3 +64,11 @@ class BarTest(TestCase):
         }
         resp = self.client.post('/new/avatar', post, follow=True)
         self.assertEqual(200, resp.status_code)
+
+    def test_avatar_unicode(self):
+        avatar = Avatar.objects.get(pk=1)
+        self.assertTrue(unicode(avatar))
+
+    def test_avatar_update(self):
+        avatar = Avatar.objects.get(pk=1)
+        self.assertRaises(NotImplementedError, avatar.update)

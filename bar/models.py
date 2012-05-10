@@ -20,5 +20,8 @@ class Avatar(models.Model):
     def get_absolute_url(self):
         return ('bar.detail.avatar', (), {'pk': self.pk})
 
+    def update(self):
+        raise NotImplementedError()
+
     def __unicode__(self):
         return self.name
