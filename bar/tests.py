@@ -33,6 +33,11 @@ class BarTest(TestCase):
         resp = self.client.get('/')
         self.assertEqual(200, resp.status_code)
 
+    def test_index_queryset(self):
+        resp = self.client.get('/')
+        expected_qs = ["What is the air speed velocity of an unladen swallow?", ]
+        self.assertQuerysetEqual(resp.context['object_list'], expected_qs, lambda x: x.question)
+
     def test_create(self):
         post = {
                 'question'  : 'What is your name?',
