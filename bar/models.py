@@ -11,3 +11,14 @@ class Poll(models.Model):
 
     def __unicode__(self):
         return self.question
+
+class Avatar(models.Model):
+    image = models.FileField(upload_to='uploads/')
+    name = models.CharField(max_length=50)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('bar.detail.avatar', (), {'pk': self.pk})
+
+    def __unicode__(self):
+        return self.name
